@@ -6,7 +6,7 @@ public struct Bytes: ContiguousBytes, CustomStringConvertible, Equatable, Hashab
     public var description: String { hexEncodedString() }
     public var data: Data { Data(rawValue) }
 
-    public enum Errors: Error {
+    public enum DecodingError: Error {
         case cannotDecodeHex(String)
     }
 
@@ -28,7 +28,7 @@ public struct Bytes: ContiguousBytes, CustomStringConvertible, Equatable, Hashab
 
             self.init(rawValue: bytes)
         } else {
-            throw Errors.cannotDecodeHex(string)
+            throw DecodingError.cannotDecodeHex(string)
         }
     }
 
