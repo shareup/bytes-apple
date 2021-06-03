@@ -9,10 +9,6 @@ let package = Package(
         .library(
             name: "Bytes",
             targets: ["Bytes"]),
-        .library(
-            name: "BytesDynamic",
-            type: .dynamic,
-            targets: ["Bytes"]),
     ],
     dependencies: [],
     targets: [
