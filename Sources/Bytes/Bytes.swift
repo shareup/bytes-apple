@@ -1,6 +1,8 @@
 import Foundation
 
-public struct Bytes: ContiguousBytes, CustomStringConvertible, Equatable, Hashable, RawRepresentable {
+public struct Bytes: ContiguousBytes, CustomStringConvertible, Equatable, Hashable,
+    RawRepresentable, Sendable
+{
     public let rawValue: [UInt8]
 
     public var description: String { hexEncodedString() }
@@ -19,7 +21,7 @@ public struct Bytes: ContiguousBytes, CustomStringConvertible, Equatable, Hashab
     }
 
     public init(hexEncoded string: String) throws {
-        if string.count % 2 == 0 && string.allSatisfy({ $0.isHexDigit }) {
+        if string.count % 2 == 0, string.allSatisfy(\.isHexDigit) {
             let bytes = stride(from: 0, to: string.count, by: 2).map { i -> UInt8 in
                 let startIndex = string.index(string.startIndex, offsetBy: i)
                 let endIndex = string.index(string.startIndex, offsetBy: i + 1)
@@ -33,10 +35,10 @@ public struct Bytes: ContiguousBytes, CustomStringConvertible, Equatable, Hashab
     }
 
     public func hexEncodedString() -> String {
-        return rawValue.map {
+        rawValue.map {
             let encoded = String($0, radix: 16)
 
-            if (encoded.count == 2) {
+            if encoded.count == 2 {
                 return encoded
             } else {
                 return "0\(encoded)"
