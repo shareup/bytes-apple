@@ -38,7 +38,7 @@ To use `Bytes` with the Swift Package Manager, add a dependency to your Package.
         .package(
             name: "Bytes",
             url: "https://github.com/shareup/bytes-apple.git",
-            from: "3.0.0"
+            from: "3.1.0"
         )
     ]
  )

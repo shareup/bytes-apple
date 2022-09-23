@@ -1,5 +1,5 @@
-import XCTest
 @testable import Bytes
+import XCTest
 
 final class BytesTests: XCTestCase {
     func testStringValueIsBase16() throws {
